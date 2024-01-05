@@ -1,0 +1,21 @@
+Upcoming developments for the release of Brick Shooters II:
+
+Functionality:
+- Add PS4 controller support ();
+- Add more enemies ();
+- Add more levels ();
+- Add more power-ups ();
+- Improve UI ();
+- Add a start menu ();
+- Add a boss level ().
+
+Code Improvements:
+- Improve code readability ();
+- Improve code performance ();
+- Improve code structure ();
+- Improve code comments ();
+- Improve code documentation ().
+- Create factories for the ships and power-ups ();
+- Use Observer pattern for the updates of the UI and game elements ();
+- Use Strategy pattern for the different types of enemy movements ();
+- Use State pattern for the different states of the game ().
