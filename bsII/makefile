@@ -9,6 +9,8 @@ CONCURRENCY_MAKEFILE := $(SRC)/Concurrency/makefile
 GAME_CONTROL_MAKEFILE := $(SRC)/Game/Control/makefile
 GAME_INTERFACE_MAKEFILE := $(SRC)/Game/Interface/makefile
 GAME_LOGIC_MAKEFILE := $(SRC)/Game/Logic/makefile
+UTILS_MAKEFILE := $(SRC)/Utils/makefile
+TEST_MAKEFILE := $(SRC)/Test/makefile
 MAIN_MAKEFILE := $(SRC)/makefile
 
 # Compiler and linker
@@ -40,6 +42,8 @@ compileSource:
 	@$(MAKE) -s -C $(SRC)/Game/Logic -f $(GAME_LOGIC_MAKEFILE)
 	@$(MAKE) -s -C $(SRC)/Concurrency -f $(CONCURRENCY_MAKEFILE)
 	@$(MAKE) -s -C $(SRC) -f $(MAIN_MAKEFILE)
+	@$(MAKE) -s -C $(SRC)/Utils -f $(UTILS_MAKEFILE)
+	@$(MAKE) -s -C $(SRC)/Test -f $(TEST_MAKEFILE)
 
 clean:
 	@rm -rf $(PROJ_NAME) $(OBJDIR) *~

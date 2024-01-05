@@ -1,11 +1,10 @@
 #include "Game/Control/BrickShooter.h"
 #include "Concurrency/system.h"
 #include "Concurrency/traits.h"
-#include "Game/Control/Config.h"
 
 __USING_API
 
-int main(void)
+int main()
 {
     // Starts the game
     System::init(&BrickShooter::play);
