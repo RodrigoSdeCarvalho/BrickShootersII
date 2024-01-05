@@ -142,7 +142,7 @@ inline void CollisionHandler::handleEnemyShotCollisions(Shot* shot)
     }
 }
 
-inline void CollisionHandler::handlePlayerShotCollisions(SOLUTION::Shot *shot)
+inline void CollisionHandler::handlePlayerShotCollisions(Shot *shot)
 {
     if (player == nullptr)
         return;

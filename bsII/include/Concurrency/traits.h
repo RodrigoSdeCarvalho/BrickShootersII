@@ -3,9 +3,9 @@
 
 //Não alterar as 3 declarações abaixo
 
-#define __BEGIN_API             namespace SOLUTION {
-#define __END_API               }
-#define __USING_API            using namespace SOLUTION;
+#define __BEGIN_API
+#define __END_API
+#define __USING_API
 
 __BEGIN_API
 
