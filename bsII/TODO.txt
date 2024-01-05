@@ -14,8 +14,11 @@ Code Improvements:
 - Improve code performance ();
 - Improve code structure ();
 - Improve code comments ();
-- Improve code documentation ().
+- Improve code documentation ();
+- Use more Templates, Meta-templates and Meta-programming ();
+- Use more modern C++ features ();
 - Create factories for the ships and power-ups ();
 - Use Observer pattern for the updates of the UI and game elements ();
 - Use Strategy pattern for the different types of enemy movements ();
-- Use State pattern for the different states of the game ().
+- Use State pattern for the different states of the game ();
+- Use Singleton pattern for configs, sound and stage manager ().
