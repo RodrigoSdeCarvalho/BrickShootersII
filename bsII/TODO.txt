@@ -10,6 +10,7 @@ Functionality:
 - Add a boss level ().
 
 Code Improvements:
+- Use semaphores properly ();
 - Improve code readability ();
 - Improve code performance ();
 - Improve code structure ();
