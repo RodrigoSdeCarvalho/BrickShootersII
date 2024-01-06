@@ -1,20 +1,21 @@
 #ifndef HITTABLE_H
 #define HITTABLE_H
 
-#include "Concurrency/traits.h"
+#include "Traits/Traits.h"
+
 #include "Game/Interface/Drawable.h"
 
-__BEGIN_API
-
+namespace BrickShooter
+{
     class Collidable : public Drawable
     {
     public:
-        virtual ~Collidable() {}
+        ~Collidable() override = default;
 
         virtual void collide(int damage) = 0;
+
         virtual bool isDead() = 0;
     };
-
-__END_API
+} // namespace BrickShooter
 
 #endif

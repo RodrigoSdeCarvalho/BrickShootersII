@@ -1,5 +1,5 @@
-#ifndef FUNCTION_HPP
-#define FUNCTION_HPP
+#ifndef FUNCTION_H
+#define FUNCTION_H
 
 #include <string>
 
@@ -21,4 +21,4 @@ namespace Test
     };
 }
 
-#endif //FUNCTION_HPP
+#endif //FUNCTION_H

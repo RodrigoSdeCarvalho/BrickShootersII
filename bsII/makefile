@@ -9,6 +9,7 @@ CONCURRENCY_MAKEFILE := $(SRC)/Concurrency/makefile
 GAME_CONTROL_MAKEFILE := $(SRC)/Game/Control/makefile
 GAME_INTERFACE_MAKEFILE := $(SRC)/Game/Interface/makefile
 GAME_LOGIC_MAKEFILE := $(SRC)/Game/Logic/makefile
+DEBUG_MAKEFILE := $(SRC)/Debug/makefile
 UTILS_MAKEFILE := $(SRC)/Utils/makefile
 TEST_MAKEFILE := $(SRC)/Test/makefile
 MAIN_MAKEFILE := $(SRC)/makefile
@@ -41,18 +42,26 @@ compileSource:
 	@$(MAKE) -s -C $(SRC)/Game/Interface -f $(GAME_INTERFACE_MAKEFILE)
 	@$(MAKE) -s -C $(SRC)/Game/Logic -f $(GAME_LOGIC_MAKEFILE)
 	@$(MAKE) -s -C $(SRC)/Concurrency -f $(CONCURRENCY_MAKEFILE)
-	@$(MAKE) -s -C $(SRC) -f $(MAIN_MAKEFILE)
 	@$(MAKE) -s -C $(SRC)/Utils -f $(UTILS_MAKEFILE)
+	@$(MAKE) -s -C $(SRC)/Debug -f $(DEBUG_MAKEFILE)
 	@$(MAKE) -s -C $(SRC)/Test -f $(TEST_MAKEFILE)
+	@$(MAKE) -s -C $(SRC) -f $(MAIN_MAKEFILE)
 
 clean:
+	rm -rf log.txt
+	clear
 	@rm -rf $(PROJ_NAME) $(OBJDIR) *~
+	echo "Done!"
 
 install:
 	sudo apt-get install libsfml-dev
 	sudo apt install libpng-dev	
 
 run:
-	./$(PROJ_NAME)
+	@if [ "$(log)" = "true" ]; then \
+		./$(PROJ_NAME) > log.txt; \
+	else \
+		./$(PROJ_NAME) ; \
+	fi
 
 .PHONY: all clean

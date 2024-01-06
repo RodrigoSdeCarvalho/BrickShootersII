@@ -1,5 +1,5 @@
-#ifndef DEBUG_HPP
-#define DEBUG_HPP
+#ifndef DEBUG_H
+#define DEBUG_H
 
 #include <iostream>
 #include "Traits/Traits.h"
@@ -65,4 +65,4 @@ namespace Debug
     class SelectDebug<false>: public NullDebug {};
 }
 
-#endif //DEBUG_HPP
+#endif //DEBUG_H

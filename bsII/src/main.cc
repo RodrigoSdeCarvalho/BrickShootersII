@@ -1,13 +1,16 @@
-#include "Game/Control/BrickShooter.h"
+#include "Debug/Info.h"
 #include "Concurrency/system.h"
-#include "Concurrency/traits.h"
+#include "Game/Control/BrickShooter.h"
 
-__USING_API
+#define Game BrickShooter::BrickShooter // "using BrickShooter::BrickShooter" is ambiguous
 
 int main()
 {
+    using Concurrency::System;
+
     // Starts the game
-    System::init(&BrickShooter::play);
+    Debug::Info<Game, SHOW>() << "INFO(GAME): " << "BRICK SHOOTER STARTED." << Debug::endl;
+    System::init(&Game::play);
 
     return 0;
 }

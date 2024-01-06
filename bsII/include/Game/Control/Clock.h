@@ -1,27 +1,28 @@
 #ifndef CLOCK_H
 #define CLOCK_H
 
-#include "Concurrency/traits.h"
 #include "SFML/Graphics.hpp"
 
-__BEGIN_API
+#include "Traits/Traits.h"
 
-class Clock {
-public:
-    Clock();
+namespace BrickShooter
+{
+    class Clock
+    {
+    public:
+        Clock();
 
-    ~Clock() = default;
+        ~Clock() = default;
 
-    void restart();
+        void restart();
 
-    double getElapsedTime();
+        double getElapsedTime();
 
-private:
-    sf::Clock clock;
-    int fps;
-    double previousTime;
-};
-
-__END_API
+    private:
+        sf::Clock clock;
+        int fps;
+        double previousTime;
+    };
+} // namespace BrickShooter
 
 #endif //CLOCK_H

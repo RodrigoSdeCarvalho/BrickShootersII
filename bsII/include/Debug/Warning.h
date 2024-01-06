@@ -1,5 +1,5 @@
-#ifndef WARNING_HPP
-#define WARNING_HPP
+#ifndef DB_WARNING_H
+#define DB_WARNING_H
 
 #include "Traits/Traits.h"
 #include "Debug/Debug.h"
@@ -19,6 +19,6 @@ namespace Debug
             return SelectDebug<false>();
         }
     }
-} // namespace Debug
+} 
 
-#endif //WARNING_HPP
+#endif //DB_WARNING_H

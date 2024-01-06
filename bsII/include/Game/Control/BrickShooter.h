@@ -1,60 +1,72 @@
 #ifndef controller_h
 #define controller_h
 
-#include "Concurrency/traits.h"
 #include <SFML/Graphics.hpp>
-#include "Game/Logic/Player.h"
-#include "Game/Logic/Enemy.h"
-#include "Game/Logic/Info.h"
+
 #include "Game/Control/keyboardController.h"
 #include "Game/Control/Config.h"
-#include "Game/Interface/window.h"
+#include "Game/Logic/Info.h"
+
+#include "Game/Logic/Player.h"
+#include "Game/Logic/Enemy.h"
 #include "Game/Logic/CollisionHandler.h"
 
-__BEGIN_API
+#include "Game/Interface/window.h"
+#include "Game/Interface/Sounds.h"
 
-class BrickShooter
+namespace BrickShooter
 {
-public:
-    BrickShooter() = default;
-    ~BrickShooter() = default;
+    using Concurrency::Thread;
 
-    static void play(void * name);
-    static void init();
+    class BrickShooter
+    {
+    public:
+        BrickShooter() = default;
 
-    static void restart();
+        ~BrickShooter() = default;
 
-    static void increaseScore();
-    static void increaseLevel();
+        static void play(void *name);
 
-    static bool shouldLevelUp();
-    static Info* info;
+        static void init();
 
-private:
+        static void restart();
 
-    //Objects
-    static Player* player;
-    static KeyboardHandler* keyboardHandler;
-    static CollisionHandler* collisionHandler;
-    static Window* window;
-    static vector<Enemy*> enemies;
+        static void increaseScore();
 
-    //Threads
-    static Thread* playerThread;
-    static Thread* collisionHandlerThread;
-    static Thread* keyboardHandlerThread;
-    static Thread* windowThread;
-    static vector<Thread*> enemiesThreads;
+        static void increaseLevel();
 
-    static int killedEnemies;
+        static bool shouldLevelUp();
 
-    static void playerThreadFunction();
-    static void collisionHandlerThreadFunction();
-    static void keyboardHandlerThreadFunction();
-    static void windowThreadFunction();
-    static void enemiesThreadFunction(int index);
-};
+        static Info* info;
 
-__END_API
+    private:
+
+        //Objects
+        static Player* player;
+        static KeyboardHandler* keyboardHandler;
+        static CollisionHandler* collisionHandler;
+        static Window* window;
+        static std::vector<Enemy*> enemies;
+
+        //Threads
+        static Thread* playerThread;
+        static Thread* collisionHandlerThread;
+        static Thread* keyboardHandlerThread;
+        static Thread* windowThread;
+        static std::vector<Thread*> enemiesThreads;
+
+        static int killedEnemies;
+
+        static void playerThreadFunction();
+
+        static void collisionHandlerThreadFunction();
+
+        static void keyboardHandlerThreadFunction();
+
+        static void windowThreadFunction();
+
+        static void enemiesThreadFunction(int index);
+    };
+} // namespace BrickShooter
 
 #endif //controller_h

@@ -1,31 +1,36 @@
 #ifndef INFO_H
 #define INFO_H
 
-#include "Concurrency/traits.h"
+#include "Traits/Traits.h"
+
 #include "Concurrency/semaphore.h"
 
-__BEGIN_API
-
-class Info
+namespace BrickShooter
 {
-public:
-    Info();
-    ~Info();
+    using Concurrency::Semaphore;
 
-    int score;
-    int lives;
-    int level;
+    class Info
+    {
+    public:
+        Info();
 
-    static Semaphore* scoreSemaphore;
-    static Semaphore* livesSemaphore;
-    static Semaphore* levelSemaphore;
+        ~Info();
 
-    void incraseScore();
-    void decreaseLives();
-    void increaseLevel();
+        int score;
+        int lives;
+        int level;
 
-};
+        static Semaphore *scoreSemaphore;
+        static Semaphore *livesSemaphore;
+        static Semaphore *levelSemaphore;
 
-__END_API
+        void incraseScore();
+
+        void decreaseLives();
+
+        void increaseLevel();
+
+    };
+} // namespace BrickShooter
 
 #endif //INFO_H

@@ -1,25 +1,23 @@
 #ifndef thread_h
 #define thread_h
 
-#include "Concurrency/cpu.h"
-#include "Concurrency/traits.h"
-#include "Concurrency/debug.h"
 #include <queue>
-#include "Concurrency/list.h"
 #include <ctime>
 #include <chrono>
 
-using namespace std;
+#include "Debug/Trace.h"
 
-__BEGIN_API
+#include "Concurrency/cpu.h"
+#include "Concurrency/list.h"
 
+namespace Concurrency
+{
     class Thread
     {
     protected:
         typedef CPU::Context Context;
 
     public:
-
         // Declaracao de Semaphore como friend class para permitir acessar ao ponteiro _running.
         friend class Semaphore;
 
@@ -72,7 +70,7 @@ __BEGIN_API
         /*
          * Retorna o ID da thread.
          */
-        int id();
+        int id() const;
 
         /*
          * NOVO MÉTODO DESTE TRABALHO.
@@ -154,7 +152,7 @@ __BEGIN_API
          */
         static int _available_id; // id disponível para a próxima thread a ser criada. Unsigned int porque é sempre positivo.
         static int _numOfThreads; // número de threads criadas.
-        static queue<int> _released_ids; // fila de ids que foram liberados, mas ainda não foram reutilizados.
+        static std::queue<int> _released_ids; // fila de ids que foram liberados, mas ainda não foram reutilizados.
         Thread* _waiting = nullptr; // thread que espera a execução desta thread terminar.
         int _exit_code; // código de término da thread.
     };
@@ -170,17 +168,17 @@ __BEGIN_API
 
         insert_thread_link_on_ready_queue(this);
 
-        db<Thread>(TRC) << "THREAD " << this->_id << " CRIADA.\n";
-        db<Thread>(TRC) << Thread::_numOfThreads << " THREADS EXISTENTES.\n";
-        db<Thread>(TRC) << "THREADS PRONTAS: " << _ready.size() << "\n";
+        Debug::Trace<Thread, SHOW>() << "THREAD " << this->_id << " CRIADA.\n";
+        Debug::Trace<Thread, SHOW>() << Thread::_numOfThreads << " THREADS EXISTENTES.\n";
+        Debug::Trace<Thread, SHOW>() << "THREADS PRONTAS: " << _ready.size() << "\n";
     }
 
-//METODOS ABAIXO USADOS NO DISPATCHER; E COMO SÃO USADOS COM MUITA FREQUÊNCIA, FORAM IMPLEMENTADOS COMO INLINE.
+    //METODOS ABAIXO USADOS NO DISPATCHER; E COMO SÃO USADOS COM MUITA FREQUÊNCIA, FORAM IMPLEMENTADOS COMO INLINE.
 
     inline Thread* Thread::get_thread_to_dispatch_ready()
     {
         {
-            db<Thread>(TRC) << "ESCOLHENDO THREAD A SER DESPACHADA.\n";
+            Debug::Trace<Thread, SHOW>() << "ESCOLHENDO THREAD A SER DESPACHADA.\n";
             Thread* next = _ready.remove_head()->object();
             next->_state = RUNNING;
             _running = next;
@@ -191,7 +189,7 @@ __BEGIN_API
 
     inline void Thread::prepare_dispatcher_to_run_again()
     {
-        db<Thread>(TRC) << "PREPARANDO DESPACHANTE PARA EXECUTAR NOVAMENTE.\n";
+        Debug::Trace<Thread, SHOW>() << "PREPARANDO DESPACHANTE PARA EXECUTAR NOVAMENTE.\n";
         _dispatcher._state = READY;
         _ready.insert(&Thread::_dispatcher._link);
     }
@@ -203,7 +201,7 @@ __BEGIN_API
             return 0;
         }
 
-        db<Thread>(TRC) << "Thread::switch_context("<<")";
+        Debug::Trace<Thread, SHOW>() << "Thread::switch_context("<<")";
         Context * prevThreadContext = prev->context();
         Context * nextThreadContext = next->context();
 
@@ -214,7 +212,7 @@ __BEGIN_API
 
     inline void Thread::check_if_next_thread_is_finished()
     {
-        db<Thread>(TRC) << "VERIFICANDO SE A PRÓXIMA THREAD A SER EXECUTADA TERMINOU SUA EXECUÇÃO.\n";
+        Debug::Trace<Thread, SHOW>() << "VERIFICANDO SE A PRÓXIMA THREAD A SER EXECUTADA TERMINOU SUA EXECUÇÃO.\n";
         if (!_ready.empty())
         {
             Thread* next = _ready.head()->object();
@@ -224,7 +222,6 @@ __BEGIN_API
             }
         }
     }
-
-__END_API
+} // namespace Concurrency
 
 #endif

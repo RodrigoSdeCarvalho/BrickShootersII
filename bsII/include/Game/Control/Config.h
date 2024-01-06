@@ -1,42 +1,46 @@
 #ifndef CONFIGS_H
 #define CONFIGS_H
 
-#include "Concurrency/traits.h"
 #include <iostream>
-#include "Concurrency/semaphore.h"    static int enemiesPerLevel;
-
 #include <ucontext.h>
 
-__BEGIN_API
+#include "Concurrency/semaphore.h"
 
-class Config
+#include "Traits/Traits.h"
+
+namespace BrickShooter
 {
-public:
-    static Semaphore* finishedSemaphore;
-    static Semaphore* pausedSemaphore;
-    static Semaphore* gameOverSemaphore;
+    using Concurrency::Semaphore;
 
-    static int windowWidth;
-    static int windowHeight;
-    static int playableAreaWidth;
-    static int playableAreaHeight;
-    static int infoAreaWidth;
-    static int fps;
-    static int lives;
-    static int enemiesPerLevel;
-    static int maxLevel;
+    class Config
+    {
+    public:
+        static Semaphore *finishedSemaphore;
+        static Semaphore *pausedSemaphore;
+        static Semaphore *gameOverSemaphore;
 
-    static bool getFinished();
-    static bool getPaused();
-    static bool getGameOver();
+        static int windowWidth;
+        static int windowHeight;
+        static int playableAreaWidth;
+        static int playableAreaHeight;
+        static int infoAreaWidth;
+        static int fps;
+        static int lives;
+        static int enemiesPerLevel;
+        static int maxLevel;
 
-    static bool finished;
-    static bool paused;
-    static bool gameOver;
+        static bool getFinished();
 
-    static void deleteSemaphores();
-};
+        static bool getPaused();
 
-__END_API
+        static bool getGameOver();
+
+        static bool finished;
+        static bool paused;
+        static bool gameOver;
+
+        static void deleteSemaphores();
+    };
+} // namespace BrickShooter
 
 #endif //CONFIGS_H

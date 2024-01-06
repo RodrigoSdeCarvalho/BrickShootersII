@@ -2,23 +2,30 @@
 #define DRAWABLE_H
 
 #include <SFML/Graphics.hpp>
-#include "Concurrency/traits.h"
 
-__BEGIN_API
+#include "Traits/Traits.h"
 
-class Point;
+namespace Utils {
+    class Point;
+}
 
-class Drawable
+namespace BrickShooter
 {
-public:
-    virtual ~Drawable() {}
-    virtual void draw(sf::RenderWindow &window, double diffTime) = 0;
-    virtual void update(double diffTime) = 0;
-    virtual int getSize() = 0;
-    virtual Point getPosition() = 0;
-    virtual sf::FloatRect getGlobalBounds() = 0;
-};
+    class Drawable
+    {
+    public:
+        virtual ~Drawable() = default;
 
-__END_API
+        virtual void draw(sf::RenderWindow &window, double diffTime) = 0;
+
+        virtual void update(double diffTime) = 0;
+
+        virtual int getSize() = 0;
+
+        virtual Utils::Point getPosition() = 0;
+
+        virtual sf::FloatRect getGlobalBounds() = 0;
+    };
+} // namespace BrickShooter
 
 #endif //DRAWABLE_H

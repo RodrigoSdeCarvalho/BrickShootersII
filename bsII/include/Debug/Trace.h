@@ -1,5 +1,5 @@
-#ifndef TRACE_HPP
-#define TRACE_HPP
+#ifndef DB_TRACE_H
+#define DB_TRACE_H
 
 #include "Traits/Traits.h"
 #include "Debug/Debug.h"
@@ -19,6 +19,6 @@ namespace Debug
             return SelectDebug<false>();
         }
     }
-} // namespace Debug
+} 
 
-#endif //TRACE_HPP
+#endif //DB_TRACE_H

@@ -1,5 +1,5 @@
-#ifndef ERROR_HPP
-#define ERROR_HPP
+#ifndef DB_ERROR_H
+#define DB_ERROR_H
 
 #include "Traits/Traits.h"
 #include "Debug/Debug.h"
@@ -20,6 +20,6 @@ namespace Debug
             return SelectDebug<false>();
         }
     }
-} // namespace Debug
+} 
 
-#endif //ERROR_HPP
+#endif //DB_ERROR_H

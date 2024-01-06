@@ -3,12 +3,13 @@
 
 #include <ucontext.h>
 #include <iostream>
-#include "traits.h"
 
-__BEGIN_API
+#include "Traits/Traits.h"
 
-class CPU
+namespace Concurrency
 {
+    class CPU
+    {
     public:
 
         class Context
@@ -23,9 +24,9 @@ class CPU
                 allocateStack(); // aloca espaço para a pilha do contexto.
                 save(); // inicializa o contexto em _context. Que será usado no makecontext.
 
-                this->_context.uc_link = 0; // ponteiro ao contexto que seria carregado após o retorno do contexto atual. 
+                this->_context.uc_link = 0; // ponteiro ao contexto que seria carregado após o retorno do contexto atual.
                                             // porém, como não haverá tal retorno, esse valor é 0.
-                setContextStack(); 
+                setContextStack();
 
                 ucontext_t *newContextPtr =  &this->_context;
                 makecontext(newContextPtr, (void(*)())(func), sizeof...(Tn), an...); // Cria o novo contexto.
@@ -36,7 +37,7 @@ class CPU
             void save();
             void load();
 
-        private:            
+        private:
             char *_stack;
 
             void allocateStack() {
@@ -57,9 +58,7 @@ class CPU
         static int finc(volatile int & number);
         static int fdec(volatile int & number);
         static int switch_context(Context *from, Context *to);
-
-};
-
-__END_API
+    };
+} // namespace Concurrency
 
 #endif

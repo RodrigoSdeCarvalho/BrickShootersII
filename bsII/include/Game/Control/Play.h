@@ -1,26 +1,24 @@
 #ifndef PLAY_H
 #define PLAY_H
 
-#include "Concurrency/traits.h"
+#include "Traits/Traits.h"
 
-__BEGIN_API
-
-namespace Play
+namespace BrickShooter
 {
-    enum KeyPress
+    namespace Play
     {
-        UP = 0,
-        DOWN = 1,
-        RIGHT = 2,
-        LEFT = 3,
-        SHOOT = 4,
-        QUIT = 5,
-        RESTART = 6,
-        PAUSE = 7,
-        NONE = 8
-    };
-}
-
-__END_API
+        enum KeyPress {
+            UP = 0,
+            DOWN = 1,
+            RIGHT = 2,
+            LEFT = 3,
+            SHOOT = 4,
+            QUIT = 5,
+            RESTART = 6,
+            PAUSE = 7,
+            NONE = 8
+        };
+    } // namespace Play
+} // namespace BrickShooter
 
 #endif //PLAY_H

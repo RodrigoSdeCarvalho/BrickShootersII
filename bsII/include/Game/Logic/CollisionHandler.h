@@ -1,72 +1,87 @@
 #ifndef COLLISIONHANDLER_H
 #define COLLISIONHANDLER_H
+
 #include <vector>
-#include "Game/Interface/Collidable.h"
-#include "Concurrency/semaphore.h"
-#include "Concurrency/thread.h"
-#include "Concurrency/traits.h"
-#include "Game/Control/Clock.h"
 #include <memory>
 
-__BEGIN_API
+#include "Concurrency/semaphore.h"
+#include "Concurrency/thread.h"
+#include "Traits/Traits.h"
 
-class BrickShooter;
-class Enemy;
-class Shot;
-class Player;
+#include "Game/Control/Clock.h"
 
-class CollisionHandler
+#include "Game/Interface/Collidable.h"
+
+namespace BrickShooter
 {
-public:
-    CollisionHandler();
-    ~CollisionHandler();
+    class BrickShooter;
+    class Enemy;
+    class Shot;
+    class Player;
+}
 
-    static Semaphore* playerSemaphore;
-    static Semaphore* enemySemaphore;
-    static Semaphore* shotsSemaphore;
+namespace BrickShooter
+{
+    using Concurrency::Semaphore;
 
-    void run();
-
-    static void addEnemy(Enemy* enemy);
-    static void addShot(Shot* shot);
-    static void addPlayer(Player* player);
-
-    static void removeEnemy(Enemy* enemy);
-    static void removeShot(Shot* shot);
-    static void removePlayer();
-
-    void restart();
-
-private:
-    static vector<Enemy*> enemies;
-    static Player* player;
-    static vector<Shot*> shots;
-    static vector<Shot*> shotsToRemove;
-    unique_ptr<Clock> enemyCollisionClock;
-
-    void handleCollisions();
-    void handlePlayerEnemyCollisions();
-    void handleShotCollisions();
-    void handleShotShotCollisions();
-    void handleEnemyShotCollisions(Shot* shot);
-    void handlePlayerShotCollisions(Shot* shot);
-    bool hasCollided(Drawable* drawable1, Drawable* drawable2);
-
-    template<typename T>
-    static bool isPointerInVector(const std::vector<T*>& vec, const T* ptr)
+    class CollisionHandler
     {
-        for (const auto& element : vec)
-        {
-            if (element == ptr)
-            {
-                return true;
+    public:
+        CollisionHandler();
+
+        ~CollisionHandler();
+
+        static Semaphore *playerSemaphore;
+        static Semaphore *enemySemaphore;
+        static Semaphore *shotsSemaphore;
+
+        void run();
+
+        static void addEnemy(Enemy *enemy);
+
+        static void addShot(Shot *shot);
+
+        static void addPlayer(Player *player);
+
+        static void removeEnemy(Enemy *enemy);
+
+        static void removeShot(Shot *shot);
+
+        static void removePlayer();
+
+        void restart();
+
+    private:
+        static std::vector<Enemy *> enemies;
+        static Player *player;
+        static std::vector<Shot *> shots;
+        static std::vector<Shot *> shotsToRemove;
+        std::unique_ptr <Clock> enemyCollisionClock;
+
+        void handleCollisions();
+
+        void handlePlayerEnemyCollisions();
+
+        void handleShotCollisions();
+
+        void handleShotShotCollisions();
+
+        void handleEnemyShotCollisions(Shot *shot);
+
+        void handlePlayerShotCollisions(Shot *shot);
+
+        bool hasCollided(Drawable *drawable1, Drawable *drawable2);
+
+        template<typename T>
+        static bool isPointerInVector(const std::vector<T *> &vec, const T *ptr) {
+            for (const auto &element: vec) {
+                if (element == ptr) {
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
-    }
-
-};
-
-__END_API
+    };
+} // namespace BrickShooter
 
 #endif //COLLISIONHANDLER_H

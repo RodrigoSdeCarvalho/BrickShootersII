@@ -1,5 +1,5 @@
-#ifndef INFO_HPP
-#define INFO_HPP
+#ifndef DB_INFO_H
+#define DB_INFO_H
 
 #include "Traits/Traits.h"
 #include "Debug/Debug.h"
@@ -19,6 +19,6 @@ namespace Debug
             return SelectDebug<false>();
         }
     }
-} // namespace Debug
+} 
 
-#endif //INFO_HPP
+#endif //DB_INFO_H
