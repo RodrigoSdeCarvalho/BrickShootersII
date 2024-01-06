@@ -6,8 +6,13 @@
 
 #include "Game/Interface/Sounds.h"
 
+#include "Utils/Path.h"
+
 namespace BrickShooter
 {
+    using Utils::Path;
+    using Utils::SysPath;
+
     Shot::Shot(const Point &position, Shot::Direction direction, bool isPlayerShot) {
         this->position = position;
         this->speed = getSpeed(direction);
@@ -39,7 +44,9 @@ namespace BrickShooter
     }
 
     void Shot::loadAndBindTexture() {
-        texture.loadFromFile("assets/sprites/space_ships/shot.png");
+        SysPath shotPath = Path::getSpaceShipSpritePath("shot.png");
+
+        texture.loadFromFile(shotPath);
         sprite.setTexture(texture);
         sprite.scale(-0.5, -0.5);
         sf::Vector2u textureSize = texture.getSize();

@@ -21,13 +21,10 @@ namespace Utils
     public:
         static SysPath getSourcePath();
 
-        static SysPath getModelsPath();
-
-        static SysPath getModelPath(const std::string& modelName);
-
-        static SysPath getVideosPath();
-
-        static SysPath getVideoPath(const std::string& videoName);
+        static SysPath getSpaceShipSpritePath(std::string&& name);
+        static SysPath getMazeSpritePath(std::string&& name);
+        static SysPath getSoundPath(std::string&& name);
+        static SysPath getFontPath(std::string&& name);
 
         template<typename... Args>
         static SysPath join(std::filesystem::path path, Args... args);

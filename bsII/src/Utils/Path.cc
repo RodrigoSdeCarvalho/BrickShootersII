@@ -50,33 +50,28 @@ namespace Utils
         return source;
     }
 
-    SysPath Path::getModelsPath() {
-        SysPath base = Path::root;
-        SysPath models = base / "models";
+    SysPath Path::getSpaceShipSpritePath(std::string&& name) {
+        SysPath spaceShipSpritePath = Path::join(Path::root, "assets", "sprites", "space_ships", name);
 
-        return models;
+        return spaceShipSpritePath;
     }
 
-    SysPath Path::getModelPath(const std::string &modelName) {
-        SysPath modelsFolderPath = Path::getModelsPath();
-        std::string modelFile = modelName + ".pt";
+    SysPath Path::getMazeSpritePath(std::string&& name) {
+        SysPath spaceShipSpritePath = Path::join(Path::root, "assets", "sprites", "maze", name);
 
-        SysPath modelPath = Path::join(modelsFolderPath, modelFile);
-
-        return modelPath;
+        return spaceShipSpritePath;
     }
 
-    SysPath Path::getVideosPath() {
-        SysPath base = Path::root;
-        SysPath videos = base / "videos";
+    SysPath Path::getSoundPath(std::string&& name) {
+        SysPath spaceShipSpritePath = Path::join(Path::root, "assets", "sounds", name);
 
-        return videos;
+        return spaceShipSpritePath;
     }
 
-    SysPath Path::getVideoPath(const std::string &videoName) {
-        SysPath videos = Path::getVideosPath();
-        SysPath video = videos / videoName;
+    SysPath Path::getFontPath(std::string&& name) {
+        SysPath spaceShipSpritePath = Path::join(Path::root, "assets", "fonts", name);
 
-        return video;
+        return spaceShipSpritePath;
     }
+
 } // namespace Utils

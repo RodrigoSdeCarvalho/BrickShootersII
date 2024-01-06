@@ -13,8 +13,13 @@
 #include "Game/Interface/window.h"
 #include "Game/Interface/Sounds.h"
 
+#include "Utils/Path.h"
+
 namespace BrickShooter
 {
+    using Utils::Path;
+    using Utils::SysPath;
+
     int Player::PLAYER_SIZE = 48;
     int Player::PLAYER_SPEED = 250;
     float Player::SHOT_COOLDOWN = 200;
@@ -55,7 +60,9 @@ namespace BrickShooter
     }
 
     void Player::loadAndBindTexture() {
-        texture.loadFromFile("assets/sprites/space_ships/space_ship1.png");
+        SysPath playerPath = Path::getSpaceShipSpritePath("space_ship1.png");
+
+        texture.loadFromFile(playerPath);
         sprite.setTexture(texture);
         sprite.scale(-0.5, -0.5);
         sf::Vector2u textureSize = texture.getSize();

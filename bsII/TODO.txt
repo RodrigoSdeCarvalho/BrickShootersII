@@ -11,9 +11,9 @@ Functionality:
 
 Code Improvements:
 - Use semaphores properly ();
-- Improve code readability ();
+- Improve code readability (x);
 - Improve code performance ();
-- Improve code structure ();
+- Improve code structure (x);
 - Improve code comments ();
 - Improve code documentation ();
 - Use more Templates, Meta-templates and Meta-programming ();

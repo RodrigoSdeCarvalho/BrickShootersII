@@ -10,17 +10,25 @@
 #include "Game/Interface/window.h"
 #include "Game/Interface/Sounds.h"
 
+#include "Utils/Path.h"
+
 namespace BrickShooter
 {
+    using Utils::Path;
+    using Utils::SysPath;
+
     std::vector<Drawable *> Window::toBeDrawn = std::vector<Drawable *>();
     Semaphore *Window::toBeDrawnSemaphore = new Semaphore();
     Semaphore *Window::infoSemaphore = new Semaphore();
 
     Window::Window() {
-        maze_tex.loadFromFile("assets/sprites/maze/screen.png");
+    SysPath mazePath = Path::getMazeSpritePath("screen.png");
+    SysPath fontPath = Path::getFontPath("arial.ttf");
+
+    maze_tex.loadFromFile(mazePath);
         maze_sprite.setTexture(maze_tex);
         maze_sprite.scale(1.5, 1.5);
-        font.loadFromFile("assets/fonts/arial.ttf");
+        font.loadFromFile(fontPath);
     }
 
     Window::~Window() {
@@ -114,7 +122,7 @@ namespace BrickShooter
     }
 
     void Window::run() {
-        sf::RenderWindow renderWindow(sf::VideoMode(Config::windowWidth, Config::windowHeight), "BrickShooters");
+        sf::RenderWindow renderWindow(sf::VideoMode(Config::windowWidth, Config::windowHeight), "Brick Shooters II");
         this->window = &renderWindow;
         window->setKeyRepeatEnabled(true);
         window->setFramerateLimit(Config::fps);

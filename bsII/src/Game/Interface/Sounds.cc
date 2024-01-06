@@ -2,10 +2,13 @@
 
 #include "Game/Interface/Sounds.h"
 
-// #include "Utils/Path.h"
+#include "Utils/Path.h"
 
 namespace BrickShooter
 {
+    using Utils::Path;
+    using Utils::SysPath;
+
     sf::Music Sounds::backgroundMusic;
 
     sf::SoundBuffer Sounds::shotSoundBuffer;
@@ -29,14 +32,14 @@ namespace BrickShooter
     sf::Sound Sounds::restartSound;
 
     void Sounds::loadSounds() {
-        backgroundMusic.openFromFile("assets/sounds/background.ogg");
+        backgroundMusic.openFromFile(Path::getSoundPath("background.ogg"));
         backgroundMusic.setLoop(true);
 
-        shotSoundBuffer.loadFromFile("assets/sounds/shot.wav");
-        hitSoundBuffer.loadFromFile("assets/sounds/hit.wav");
-        gameOverSoundBuffer.loadFromFile("assets/sounds/gameOver.wav");
-        levelUpSoundBuffer.loadFromFile("assets/sounds/levelUp.wav");
-        restartSoundBuffer.loadFromFile("assets/sounds/restart.wav");
+        shotSoundBuffer.loadFromFile(Path::getSoundPath("shot.wav"));
+        hitSoundBuffer.loadFromFile(Path::getSoundPath("hit.wav"));
+        gameOverSoundBuffer.loadFromFile(Path::getSoundPath("gameOver.wav"));
+        levelUpSoundBuffer.loadFromFile(Path::getSoundPath("levelUp.wav"));
+        restartSoundBuffer.loadFromFile(Path::getSoundPath("restart.wav"));
 
         shotSound.setBuffer(shotSoundBuffer);
         hitSound.setBuffer(hitSoundBuffer);
