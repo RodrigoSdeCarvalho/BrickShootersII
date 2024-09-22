@@ -1,20 +1,18 @@
 # Brick Shooters II
-A classic space ship shooter game implemented in C++ with the Concurrency lib I developed with two friends at uni/.
+A classic spaceship shooter game implemented in C++ with the Concurrency lib I developed with two friends at university, for our Operating Systems course.
 
 This game is only for linux.
 
 # How to run
+```bash
+cd bsII
 
-sudo apt-get install libsfml-dev
+make install
 
-sudo apt install libpng-dev
+make build
 
-cd Code
-
-make
-
-./Main
-
+make run # or./Main
+```
 
 # How to play
 
